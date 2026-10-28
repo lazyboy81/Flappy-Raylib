@@ -17,7 +17,6 @@ var gamePaused = false
 
 type State interface {
 	Enter(map[string]any)
-	Exit()
 	Update(dt float32)
 	Render()
 }
@@ -25,8 +24,6 @@ type State interface {
 type emptyState struct{}
 
 func (es *emptyState) Enter(params map[string]any) {}
-
-func (es *emptyState) Exit() {}
 
 func (es *emptyState) Update(dt float32) {}
 
@@ -39,10 +36,6 @@ func NewTitleScreenState() *TitleScreenState {
 }
 
 func (ts *TitleScreenState) Enter(params map[string]any) {
-
-}
-
-func (ts *TitleScreenState) Exit() {
 
 }
 
@@ -71,10 +64,6 @@ func (cs *CountDownState) Enter(params map[string]any) {
 	if params != nil {
 		cs.gameParams = params
 	}
-}
-
-func (cs *CountDownState) Exit() {
-
 }
 
 func (cs *CountDownState) Update(dt float32) {
@@ -126,10 +115,6 @@ func (ps *PlayState) Enter(params map[string]any) {
 		ps.score = params["score"].(int)
 		ps.lastY = params["lastY"].(float64)
 	}
-}
-
-func (ps *PlayState) Exit() {
-
 }
 
 func (ps *PlayState) Update(dt float32) {
@@ -230,10 +215,6 @@ func (ps *PauseState) Enter(params map[string]any) {
 	ps.gameParams = params
 }
 
-func (ps *PauseState) Exit() {
-
-}
-
 func (ps *PauseState) Update(dt float32) {
 	if rl.IsKeyPressed(rl.KeyR) {
 		gamePaused = false
@@ -252,10 +233,6 @@ type ScoreState struct {
 
 func (ss *ScoreState) Enter(params map[string]any) {
 	ss.score = params["score"].(int)
-}
-
-func (ss *ScoreState) Exit() {
-
 }
 
 func (ss *ScoreState) Update(dt float32) {
